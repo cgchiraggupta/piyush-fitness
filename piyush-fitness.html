@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sports Coach | Piyush Loharwadia</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --dark: #141414;
+    --card: #1c1c1c;
+    --orange: #FF5C00;
+    --orange-dim: #ff5c0022;
+    --white: #f0f0f0;
+    --muted: #888;
+    --border: #2a2a2a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    height: 60px;
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    color: var(--orange);
+  }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-start;
+    padding: 100px 8% 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 55%; height: 100%;
+    background: radial-gradient(ellipse at 80% 40%, rgba(255,92,0,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--orange);
+    border: 1px solid var(--orange); border-radius: 2px;
+    padding: 4px 12px; display: inline-block; margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 9vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+  }
+  .hero h1 span { color: var(--orange); }
+  .hero-sub {
+    font-size: 1rem; color: var(--muted);
+    max-width: 440px; margin-bottom: 40px; font-weight: 300;
+  }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--orange); color: #fff;
+    border: none; padding: 13px 28px;
+    font-size: 0.82rem; font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase; cursor: pointer; border-radius: 2px;
+    transition: opacity 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-ghost {
+    background: transparent; color: var(--white);
+    border: 1px solid var(--border); padding: 13px 28px;
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 1.5px;
+    text-transform: uppercase; cursor: pointer; border-radius: 2px;
+    transition: border-color 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--muted); }
+
+  /* STATS BAR */
+  .stats {
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: flex; justify-content: center; flex-wrap: wrap;
+    gap: 0;
+  }
+  .stat {
+    padding: 28px 48px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.4rem; color: var(--orange); line-height: 1;
+  }
+  .stat-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 4px; }
+
+  /* SECTIONS */
+  section { padding: 80px 8%; }
+  .section-tag {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--orange);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    letter-spacing: 1px; margin-bottom: 40px;
+  }
+
+  /* SPECIALTIES */
+  #specialties { background: var(--black); }
+  .specialty-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px;
+    border: 1px solid var(--border);
+  }
+  .specialty-card {
+    background: var(--dark);
+    padding: 32px 28px;
+    border-right: 1px solid var(--border);
+    transition: background 0.2s;
+    position: relative;
+    cursor: pointer;
+  }
+  .specialty-card:hover { background: var(--card); }
+  .specialty-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--orange);
+    transition: height 0.3s;
+  }
+  .specialty-card:hover::before { height: 100%; }
+  .specialty-icon { font-size: 2rem; margin-bottom: 16px; }
+  .specialty-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem; letter-spacing: 1px; margin-bottom: 8px;
+  }
+  .specialty-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
+
+  /* ABOUT */
+  #about { background: var(--dark); border-top: 1px solid var(--border); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .about-text p { color: var(--muted); font-weight: 300; line-height: 1.9; margin-bottom: 16px; }
+  .about-text strong { color: var(--white); font-weight: 600; }
+  .about-highlights { display: flex; flex-direction: column; gap: 16px; }
+  .highlight {
+    background: var(--black);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--orange);
+    padding: 20px 24px;
+    border-radius: 2px;
+  }
+  .highlight-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 4px; }
+  .highlight-sub { font-size: 0.78rem; color: var(--muted); }
+
+  /* CONSULTATION */
+  #consult {
+    background: var(--black);
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    max-width: 920px;
+    margin: 0 auto 48px;
+  }
+  .consult-card {
+    background: var(--dark);
+    border: 1px solid var(--border);
+    padding: 36px 28px;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+    transition: border-color 0.2s;
+  }
+  .consult-card:hover { border-color: var(--orange); }
+  .consult-card.featured { border-color: var(--orange); }
+  .consult-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; background: var(--orange);
+  }
+  .plan-tag {
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--orange);
+    margin-bottom: 12px; display: block;
+  }
+  .plan-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem; letter-spacing: 1px; margin-bottom: 16px;
+  }
+  .price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.2rem; color: var(--orange); line-height: 1;
+  }
+  .price-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; margin-top: 4px; }
+  .consult-features { list-style: none; text-align: left; margin-bottom: 28px; }
+  .consult-features li {
+    padding: 9px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.82rem;
+    display: flex; align-items: center; gap: 10px;
+    color: var(--muted);
+  }
+  .consult-features li::before { content: '→'; color: var(--orange); font-weight: 700; flex-shrink: 0; }
+  .consult-features li:last-child { border-bottom: none; }
+
+  /* DEMO BANNER */
+  .demo-banner {
+    max-width: 920px; margin: 0 auto;
+    background: var(--orange-dim);
+    border: 1px solid var(--orange);
+    border-radius: 4px;
+    padding: 28px 36px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .demo-text { text-align: left; }
+  .demo-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 1px; }
+  .demo-sub { font-size: 0.82rem; color: var(--muted); margin-top: 4px; }
+  .btn-whatsapp {
+    background: #25D366; color: #fff;
+    border: none; padding: 13px 28px;
+    font-size: 0.82rem; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; cursor: pointer; border-radius: 2px;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    transition: opacity 0.2s; white-space: nowrap;
+  }
+  .btn-whatsapp:hover { opacity: 0.88; }
+
+  /* CHATBOT */
+  #chatbot { background: var(--dark); border-top: 1px solid var(--border); }
+  .chat-wrapper {
+    max-width: 680px; margin: 0 auto;
+    background: var(--black);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .chat-header {
+    background: var(--card);
+    padding: 16px 24px;
+    display: flex; align-items: center; gap: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .chat-avatar {
+    width: 36px; height: 36px;
+    background: var(--orange);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+  .chat-header-info { flex: 1; }
+  .chat-header-name { font-weight: 600; font-size: 0.9rem; }
+  .chat-header-status { font-size: 0.72rem; color: #4caf50; display: flex; align-items: center; gap: 5px; }
+  .chat-header-status::before { content: ''; width: 6px; height: 6px; background: #4caf50; border-radius: 50%; display: inline-block; }
+  .chat-messages {
+    height: 360px; overflow-y: auto;
+    padding: 20px;
+    display: flex; flex-direction: column; gap: 14px;
+    scroll-behavior: smooth;
+  }
+  .chat-messages::-webkit-scrollbar { width: 4px; }
+  .chat-messages::-webkit-scrollbar-track { background: transparent; }
+  .chat-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  .msg {
+    max-width: 80%;
+    padding: 12px 16px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    animation: fadeUp 0.3s ease;
+  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .msg-bot {
+    background: var(--card);
+    border: 1px solid var(--border);
+    align-self: flex-start;
+    border-bottom-left-radius: 0;
+  }
+  .msg-user {
+    background: var(--orange);
+    color: #fff;
+    align-self: flex-end;
+    border-bottom-right-radius: 0;
+  }
+  .typing {
+    display: flex; gap: 4px; align-items: center;
+    padding: 14px 18px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px; border-bottom-left-radius: 0;
+    align-self: flex-start;
+    width: fit-content;
+  }
+  .typing span {
+    width: 6px; height: 6px; background: var(--muted);
+    border-radius: 50%; animation: bounce 1.2s infinite;
+  }
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-6px)} }
+  .chat-input-area {
+    display: flex;
+    border-top: 1px solid var(--border);
+  }
+  .chat-input {
+    flex: 1;
+    background: transparent;
+    border: none; outline: none;
+    padding: 16px 20px;
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+  }
+  .chat-input::placeholder { color: var(--muted); }
+  .chat-send {
+    background: var(--orange);
+    border: none; cursor: pointer;
+    padding: 0 20px;
+    color: #fff;
+    font-size: 1rem;
+    transition: opacity 0.2s;
+  }
+  .chat-send:hover { opacity: 0.85; }
+
+  /* CONTACT */
+  #contact { background: var(--black); border-top: 1px solid var(--border); text-align: center; }
+  .contact-email {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--dark); border: 1px solid var(--border);
+    padding: 16px 32px; border-radius: 2px;
+    font-size: 0.9rem; color: var(--orange);
+    text-decoration: none; margin-top: 8px;
+    transition: border-color 0.2s;
+  }
+  .contact-email:hover { border-color: var(--orange); }
+  .contact-sub { color: var(--muted); font-size: 0.85rem; margin-top: 12px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+    padding: 24px 8%;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-name { font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; color: var(--orange); }
+  .footer-copy { font-size: 0.75rem; color: var(--muted); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 32px; }
+    .stat { padding: 20px 28px; }
+    section { padding: 60px 5%; }
+    .hero { padding: 100px 5% 60px; }
+    .consult-card { padding: 32px 24px; }
+  }
+
+  /* ANIMATIONS */
+  @keyframes heroFadeIn {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-tag { animation: heroFadeIn 0.7s ease both; }
+  .hero h1 { animation: heroFadeIn 0.7s 0.15s ease both; }
+  .hero-sub { animation: heroFadeIn 0.7s 0.28s ease both; }
+  .hero-btns { animation: heroFadeIn 0.7s 0.4s ease both; }
+
+  /* Scroll reveal base */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Stat counter pulse */
+  .stat-num {
+    transition: transform 0.2s ease;
+  }
+  .stat:hover .stat-num {
+    transform: scale(1.08);
+  }
+
+  /* Nav logo subtle pulse on load */
+  @keyframes logoPop {
+    0% { opacity: 0; letter-spacing: 6px; }
+    100% { opacity: 1; letter-spacing: 2px; }
+  }
+  .nav-logo { animation: logoPop 0.8s ease both; }
+
+  /* Orange underline on nav hover */
+  .nav-links a {
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--orange);
+    transition: width 0.25s ease;
+  }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* Smooth card lift */
+  .consult-card {
+    transition: transform 0.25s ease, border-color 0.2s;
+  }
+  .consult-card:hover {
+    transform: translateY(-4px);
+  }
+
+  /* Highlight card subtle slide */
+  .highlight {
+    transition: transform 0.2s ease, border-color 0.2s;
+  }
+  .highlight:hover {
+    transform: translateX(6px);
+    border-color: var(--orange);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">THE SPORTS COACH</div>
+  <div class="nav-links">
+    <a href="#specialties">Training</a>
+    <a href="#about">About</a>
+    <a href="#chatbot">Ask AI</a>
+    <a href="#consult">Consult</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">Fitness Coach · Delhi</div>
+  <h1>TRAIN HARD.<br><span>LIVE STRONGER.</span></h1>
+  <p class="hero-sub">National-level athlete turned elite fitness coach. Specializing in weight loss, muscle gain, HIIT, athletics, Hyrox & hybrid training.</p>
+  <div class="hero-btns">
+    <a href="#chatbot" class="btn-primary">Ask Free Fitness Question</a>
+    <a href="https://wa.me/919871491885?text=Hi%20Piyush!%20I'd%20love%20to%20try%20the%20FREE%202-day%20demo!" class="btn-ghost">🎯 Free 2-Day Demo</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat reveal">
+    <div class="stat-num">150+</div>
+    <div class="stat-label">Clients Trained</div>
+  </div>
+  <div class="stat reveal" style="transition-delay:0.1s">
+    <div class="stat-num">6+</div>
+    <div class="stat-label">Years Experience</div>
+  </div>
+  <div class="stat reveal" style="transition-delay:0.2s">
+    <div class="stat-num">12</div>
+    <div class="stat-label">Specialties</div>
+  </div>
+  <div class="stat reveal" style="transition-delay:0.3s">
+    <div class="stat-num">🥇</div>
+    <div class="stat-label">National Medalist</div>
+  </div>
+</div>
+
+<!-- SPECIALTIES -->
+<section id="specialties">
+  <div class="section-tag">What I Offer</div>
+  <div class="section-title">TRAINING SPECIALTIES</div>
+  <div class="specialty-grid">
+    <div class="specialty-card" onclick="openModal('weightloss')">
+      <div class="specialty-icon">🔥</div>
+      <div class="specialty-name">Weight Loss</div>
+      <div class="specialty-desc">Structured fat-loss programs combining nutrition guidance with targeted training. <span style="color:var(--orange);font-size:0.78rem;">Tap to know more →</span></div>
+    </div>
+    <div class="specialty-card" onclick="openModal('musclegain')">
+      <div class="specialty-icon">💪</div>
+      <div class="specialty-name">Muscle Gain</div>
+      <div class="specialty-desc">Build lean, strong muscle with smart programming designed around your body. <span style="color:var(--orange);font-size:0.78rem;">Tap to know more →</span></div>
+    </div>
+    <div class="specialty-card" onclick="openModal('hiit')">
+      <div class="specialty-icon">⚡</div>
+      <div class="specialty-name">HIIT Workout</div>
+      <div class="specialty-desc">Maximum results in minimum time — perfect for athletes and busy people alike. <span style="color:var(--orange);font-size:0.78rem;">Tap to know more →</span></div>
+    </div>
+    <div class="specialty-card" onclick="openModal('athletics')">
+      <div class="specialty-icon">🏃</div>
+      <div class="specialty-name">Athletics Workout</div>
+      <div class="specialty-desc">Speed, agility, and explosive power — trained by a real national-level athlete. <span style="color:var(--orange);font-size:0.78rem;">Tap to know more →</span></div>
+    </div>
+    <div class="specialty-card" onclick="openModal('hybrid')">
+      <div class="specialty-icon">🔄</div>
+      <div class="specialty-name">Hybrid Training</div>
+      <div class="specialty-desc">The best of strength and endurance combined into one complete fitness system. <span style="color:var(--orange);font-size:0.78rem;">Tap to know more →</span></div>
+    </div>
+    <div class="specialty-card" onclick="openModal('strengthconditioning')">
+      <div class="specialty-icon">🏋️</div>
+      <div class="specialty-name">Strength & Conditioning</div>
+      <div class="specialty-desc">Build raw power and athletic resilience using real competitive athlete protocols. <span style="color:var(--orange);font-size:0.78rem;">Tap to know more →</span></div>
+    </div>
+    <div class="specialty-card" onclick="openModal('functional')">
+      <div class="specialty-icon">⚙️</div>
+      <div class="specialty-name">Functional Training</div>
+      <div class="specialty-desc">Train movements your body actually uses every day — not just machines. <span style="color:var(--orange);font-size:0.78rem;">Tap to know more →</span></div>
+    </div>
+    <div class="specialty-card" onclick="openModal('boxing')">
+      <div class="specialty-icon">🥊</div>
+      <div class="specialty-name">Boxing Drills</div>
+      <div class="specialty-desc">Learn basics, build coordination, get fit — and gain real self-defence skills. <span style="color:var(--orange);font-size:0.78rem;">Tap to know more →</span></div>
+    </div>
+    <div class="specialty-card" onclick="openModal('sprinting')">
+      <div class="specialty-icon">💨</div>
+      <div class="specialty-name">Sprinting Mechanics</div>
+      <div class="specialty-desc">Run faster, move better — proper sprint form from a trained 400m track athlete. <span style="color:var(--orange);font-size:0.78rem;">Tap to know more →</span></div>
+    </div>
+    <div class="specialty-card" onclick="openModal('powerlifting')">
+      <div class="specialty-icon">🏆</div>
+      <div class="specialty-name">Powerlifting Coaching</div>
+      <div class="specialty-desc">Learn from a 2x National Gold Medalist who built it all through self-training. <span style="color:var(--orange);font-size:0.78rem;">Tap to know more →</span></div>
+    </div>
+    <div class="specialty-card" onclick="openModal('injury')">
+      <div class="specialty-icon">🛡️</div>
+      <div class="specialty-name">Injury Prevention</div>
+      <div class="specialty-desc">Train smart, stay consistent — no injuries, no setbacks, only progress. <span style="color:var(--orange);font-size:0.78rem;">Tap to know more →</span></div>
+    </div>
+    <div class="specialty-card" onclick="openModal('goalcoaching')">
+      <div class="specialty-icon">🎯</div>
+      <div class="specialty-name">Goal-Based Coaching</div>
+      <div class="specialty-desc">Your goal is unique — your plan should be too. Everything built around you. <span style="color:var(--orange);font-size:0.78rem;">Tap to know more →</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div id="specialtyModal" onclick="closeModal(event)" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:999;align-items:center;justify-content:center;padding:20px;">
+  <div id="modalBox" style="background:var(--dark);border:1px solid var(--border);border-radius:4px;max-width:480px;width:100%;padding:36px 28px;position:relative;max-height:85vh;overflow-y:auto;">
+    <button onclick="closeModalBtn()" style="position:absolute;top:16px;right:16px;background:transparent;border:1px solid var(--border);color:var(--muted);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;">✕</button>
+    <div id="modalIcon" style="font-size:2.5rem;margin-bottom:12px;"></div>
+    <div id="modalTitle" style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:1px;color:var(--orange);margin-bottom:16px;"></div>
+    <div id="modalContent" style="color:var(--muted);font-size:0.88rem;line-height:1.85;margin-bottom:24px;"></div>
+    <a id="modalCTA" href="https://wa.me/919871491885?text=Hi Piyush! I'm interested in training with you." class="btn-whatsapp" style="width:100%;justify-content:center;display:flex;">💬 Book This With Piyush</a>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-tag">The Coach</div>
+  <div class="section-title">ABOUT PIYUSH</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm <strong>Piyush Loharwadia</strong>, a fitness coach based in <strong>Dwarka, New Delhi</strong>. I spent <strong>6+ years training at Chhatrasal Stadium</strong> across sprinting, long jump, high jump, and powerlifting — competing at district and national level before transitioning into coaching.</p>
+      <p>My powerlifting gold medals were earned through <strong>pure self-training</strong> — no coach, just discipline. That same mindset is what I bring to every client. I've coached <strong>150+ clients</strong> in strength, HIIT, functional training, and athletic performance.</p>
+      <p>Whether you're a complete beginner or an experienced athlete — I'll build a program that actually works for you.</p>
+    </div>
+    <div class="about-highlights">
+      <div class="highlight">
+        <div class="highlight-title">🥇 2x National Gold — Powerlifting</div>
+        <div class="highlight-sub">Light Weight Category · Self-trained, no coach</div>
+      </div>
+      <div class="highlight">
+        <div class="highlight-title">🏆 Best Athlete Award 2021</div>
+        <div class="highlight-sub">Zone 18 · + Silver in Boxing, 400m, Long Jump</div>
+      </div>
+      <div class="highlight">
+        <div class="highlight-title">🏟️ Chhatrasal Stadium — 6+ Years</div>
+        <div class="highlight-sub">Track & Field · Sprinting, Long Jump, High Jump</div>
+      </div>
+      <div class="highlight">
+        <div class="highlight-title">👥 150+ Clients Coached</div>
+        <div class="highlight-sub">Beginners to advanced athletes · 6+ years experience</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHATBOT -->
+<section id="chatbot">
+  <div class="section-tag">Free AI Assistant</div>
+  <div class="section-title">ASK YOUR FITNESS QUESTION</div>
+  <p style="color:var(--muted);margin-bottom:32px;font-size:0.9rem;">Get instant answers on training, nutrition, and workouts. For a personalized plan — book a consultation with Piyush.</p>
+  <div class="chat-wrapper">
+    <div class="chat-header">
+      <div class="chat-avatar">🤖</div>
+      <div class="chat-header-info">
+        <div class="chat-header-name">PL Fitness AI</div>
+        <div class="chat-header-status">Online — Powered by Piyush's expertise</div>
+      </div>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="msg msg-bot">Hey! 👋 I'm Piyush's AI fitness assistant. Ask me anything about training, nutrition, or workouts — I'm here to help!</div>
+    </div>
+    <div class="chat-input-area">
+      <input class="chat-input" id="chatInput" type="text" placeholder="Ask a fitness question..." autocomplete="off" />
+      <button class="chat-send" id="chatSend" onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+</section>
+
+<!-- INVEST IN YOURSELF BANNER -->
+<section style="background:var(--dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:48px 8%;text-align:center;">
+  <div style="max-width:700px;margin:0 auto;">
+    <div class="section-tag">Why Start Now?</div>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);letter-spacing:1px;margin-bottom:16px;">YOUR BODY IS YOUR BIGGEST ASSET.<br><span style="color:var(--orange);">INVEST IN IT TODAY.</span></h2>
+    <p style="color:var(--muted);font-size:0.92rem;line-height:1.9;max-width:560px;margin:0 auto 20px;">Most people wait until their body gives up — low energy, weak joints, poor posture, constant fatigue. By the time they act, it costs 10x more in time, money, and effort to fix. The people who invest in their fitness early live stronger, feel younger, and perform better — at work, at home, everywhere. <strong style="color:var(--white);">One month of training with Piyush costs less than one specialist consultation.</strong> The question isn't whether you can afford to start — it's whether you can afford to wait.</p>
+    <a href="#consult" class="btn-primary">Start Your Fitness Journey →</a>
+  </div>
+</section>
+
+<!-- CONSULTATION -->
+<section id="consult">
+  <div class="section-tag">Work With Me</div>
+  <div class="section-title">CHOOSE YOUR PLAN</div>
+  <div class="pricing-grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+
+    <!-- Online Plan -->
+    <div class="consult-card">
+      <span class="plan-tag">Best Value · Remote</span>
+      <div class="plan-name">Online Training Plan</div>
+      <div class="price">₹600</div>
+      <div class="price-label">Per Month</div>
+      <ul class="consult-features">
+        <li>Full 1-month workout PDF — exercises explained with photos</li>
+        <li>Train anywhere, anytime — no gym needed</li>
+        <li>Progress tracked via WhatsApp chat (no calls)</li>
+        <li>Nutrition & diet guidance included</li>
+        <li>Plan updated monthly based on your progress</li>
+      </ul>
+      <a href="https://wa.me/919871491885?text=Hi%20Piyush!%20I'm%20interested%20in%20the%20Online%20Training%20Plan%20(%E2%82%B9600%2Fmonth)" class="btn-whatsapp" style="width:100%;justify-content:center;">💬 Book on WhatsApp</a>
+    </div>
+
+    <!-- Group Plan -->
+    <div class="consult-card featured">
+      <span class="plan-tag">Most Popular · Park Sessions</span>
+      <div class="plan-name">Group Membership</div>
+      <div class="price">₹2,000</div>
+      <div class="price-label">Per Month · Dwarka Park</div>
+      <ul class="consult-features">
+        <li>Open-air park sessions — fresh air, no gym walls</li>
+        <li>Bodyweight + functional training, zero boredom</li>
+        <li>Train with a friendly, motivated crowd</li>
+        <li>Everyone pushes each other — results come faster</li>
+        <li>Nutrition guidance + WhatsApp group access</li>
+      </ul>
+      <a href="https://wa.me/919871491885?text=Hi%20Piyush!%20I'm%20interested%20in%20the%20Group%20Membership%20(%E2%82%B92000%2Fmonth)" class="btn-whatsapp" style="width:100%;justify-content:center;">💬 Book on WhatsApp</a>
+    </div>
+
+    <!-- 1-on-1 Plan -->
+    <div class="consult-card">
+      <span class="plan-tag">Premium · Fastest Results</span>
+      <div class="plan-name">1-on-1 Personal Training</div>
+      <div class="price">₹3,500</div>
+      <div class="price-label">Per Month</div>
+      <ul class="consult-features">
+        <li>100% attention on you — every session, every rep</li>
+        <li>Plan built around your body, goal & lifestyle</li>
+        <li>Form correction & injury prevention in real time</li>
+        <li>Full diet + workout plan, updated regularly</li>
+        <li>Daily WhatsApp support — Piyush personally responds</li>
+        <li>Fastest transformation, guaranteed progress</li>
+      </ul>
+      <a href="https://wa.me/919871491885?text=Hi%20Piyush!%20I'm%20interested%20in%201-on-1%20Personal%20Training%20(%E2%82%B93500%2Fmonth)" class="btn-whatsapp" style="width:100%;justify-content:center;">💬 Book on WhatsApp</a>
+    </div>
+
+    <!-- Couples Plan -->
+    <div class="consult-card">
+      <span class="plan-tag">New · For Couples</span>
+      <div class="plan-name">Couples Training</div>
+      <div class="price">₹5,500</div>
+      <div class="price-label">Per Month · 1 Couple</div>
+      <ul class="consult-features">
+        <li>1-on-1 personal training for both partners together</li>
+        <li>Individual goals, one shared journey</li>
+        <li>Train together, stay motivated together</li>
+        <li>Separate diet & workout plans for each person</li>
+        <li>Daily WhatsApp support for both</li>
+        <li>Build a healthy lifestyle as a couple</li>
+      </ul>
+      <a href="https://wa.me/919871491885?text=Hi%20Piyush!%20I'm%20interested%20in%20the%20Couples%20Training%20Plan%20(%E2%82%B95500%2Fmonth)" class="btn-whatsapp" style="width:100%;justify-content:center;">💬 Book on WhatsApp</a>
+    </div>
+
+  </div>
+
+  <!-- FREE DEMO BANNER -->
+  <div class="demo-banner" style="margin-top:32px;">
+    <div class="demo-text">
+      <div class="demo-title">🎯 Try Before You Commit — FREE 2-Day Demo</div>
+      <div class="demo-sub">Join Piyush for 2 free open-air park sessions in Dwarka. No payment. No pressure. Just results.</div>
+    </div>
+    <a href="https://wa.me/919871491885?text=Hi%20Piyush!%20I'd%20love%20to%20try%20the%20FREE%202-day%20demo%20session!" class="btn-whatsapp">💬 Claim Free Demo</a>
+  </div>
+</section>
+
+<!-- BMI CALCULATOR -->
+<section id="bmi" style="background:var(--dark);border-top:1px solid var(--border);">
+  <div class="section-tag">Free Tool</div>
+  <div class="section-title">CHECK YOUR BMI</div>
+  <p style="color:var(--muted);margin-bottom:32px;font-size:0.9rem;">Find out where you stand — and what your next step should be.</p>
+  <div style="max-width:520px;margin:0 auto;background:var(--black);border:1px solid var(--border);border-radius:4px;padding:36px 32px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+      <div>
+        <label style="font-size:0.75rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:8px;">Height (cm)</label>
+        <input id="bmiHeight" type="number" placeholder="e.g. 170" style="width:100%;background:var(--dark);border:1px solid var(--border);color:var(--white);padding:12px 16px;font-size:0.9rem;border-radius:2px;outline:none;font-family:'Inter',sans-serif;" />
+      </div>
+      <div>
+        <label style="font-size:0.75rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:8px;">Weight (kg)</label>
+        <input id="bmiWeight" type="number" placeholder="e.g. 70" style="width:100%;background:var(--dark);border:1px solid var(--border);color:var(--white);padding:12px 16px;font-size:0.9rem;border-radius:2px;outline:none;font-family:'Inter',sans-serif;" />
+      </div>
+    </div>
+    <button onclick="calculateBMI()" class="btn-primary" style="width:100%;text-align:center;border:none;cursor:pointer;font-family:'Inter',sans-serif;">Calculate My BMI</button>
+    <div id="bmiResult" style="display:none;margin-top:24px;padding:20px;border-radius:2px;border:1px solid var(--border);text-align:center;">
+      <div id="bmiNumber" style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--orange);line-height:1;"></div>
+      <div id="bmiCategory" style="font-size:0.85rem;font-weight:600;margin:8px 0 4px;"></div>
+      <div id="bmiMessage" style="font-size:0.8rem;color:var(--muted);line-height:1.6;margin-bottom:16px;"></div>
+      <a id="bmiCTA" href="https://wa.me/919871491885" class="btn-whatsapp" style="display:inline-flex;justify-content:center;">💬 Get a Free Plan from Piyush</a>
+    </div>
+  </div>
+</section>
+
+<!-- CALORIE CALCULATOR -->
+<section id="calorie" style="background:var(--black);border-top:1px solid var(--border);">
+  <div class="section-tag">Free Tool</div>
+  <div class="section-title">CALORIE CALCULATOR</div>
+  <p style="color:var(--muted);margin-bottom:32px;font-size:0.9rem;">Find out exactly how many calories your body needs daily — based on your goal.</p>
+  <div style="max-width:520px;margin:0 auto;background:var(--dark);border:1px solid var(--border);border-radius:4px;padding:36px 32px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+      <div>
+        <label style="font-size:0.75rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:8px;">Age</label>
+        <input id="calAge" type="number" placeholder="e.g. 25" style="width:100%;background:var(--black);border:1px solid var(--border);color:var(--white);padding:12px 16px;font-size:0.9rem;border-radius:2px;outline:none;font-family:'Inter',sans-serif;" />
+      </div>
+      <div>
+        <label style="font-size:0.75rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:8px;">Gender</label>
+        <select id="calGender" style="width:100%;background:var(--black);border:1px solid var(--border);color:var(--white);padding:12px 16px;font-size:0.9rem;border-radius:2px;outline:none;font-family:'Inter',sans-serif;">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-size:0.75rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:8px;">Height (cm)</label>
+        <input id="calHeight" type="number" placeholder="e.g. 170" style="width:100%;background:var(--black);border:1px solid var(--border);color:var(--white);padding:12px 16px;font-size:0.9rem;border-radius:2px;outline:none;font-family:'Inter',sans-serif;" />
+      </div>
+      <div>
+        <label style="font-size:0.75rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:8px;">Weight (kg)</label>
+        <input id="calWeight" type="number" placeholder="e.g. 70" style="width:100%;background:var(--black);border:1px solid var(--border);color:var(--white);padding:12px 16px;font-size:0.9rem;border-radius:2px;outline:none;font-family:'Inter',sans-serif;" />
+      </div>
+    </div>
+    <div style="margin-bottom:16px;">
+      <label style="font-size:0.75rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:8px;">Activity Level</label>
+      <select id="calActivity" style="width:100%;background:var(--black);border:1px solid var(--border);color:var(--white);padding:12px 16px;font-size:0.9rem;border-radius:2px;outline:none;font-family:'Inter',sans-serif;">
+        <option value="1.2">Sedentary (desk job, no exercise)</option>
+        <option value="1.375">Lightly Active (1-3 days/week)</option>
+        <option value="1.55">Moderately Active (3-5 days/week)</option>
+        <option value="1.725">Very Active (6-7 days/week)</option>
+        <option value="1.9">Athlete (2x training daily)</option>
+      </select>
+    </div>
+    <div style="margin-bottom:20px;">
+      <label style="font-size:0.75rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:8px;">Your Goal</label>
+      <select id="calGoal" style="width:100%;background:var(--black);border:1px solid var(--border);color:var(--white);padding:12px 16px;font-size:0.9rem;border-radius:2px;outline:none;font-family:'Inter',sans-serif;">
+        <option value="lose">Lose Weight</option>
+        <option value="maintain">Maintain Weight</option>
+        <option value="gain">Gain Muscle / Weight</option>
+      </select>
+    </div>
+    <button onclick="calculateCalories()" class="btn-primary" style="width:100%;text-align:center;border:none;cursor:pointer;font-family:'Inter',sans-serif;">Calculate My Calories</button>
+    <div id="calResult" style="display:none;margin-top:24px;padding:24px;border-radius:2px;border:1px solid var(--border);text-align:center;">
+      <div id="calNumber" style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--orange);line-height:1;"></div>
+      <div style="font-size:0.72rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Calories Per Day</div>
+      <div id="calBreakdown" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px;"></div>
+      <div id="calMessage" style="font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:20px;padding:14px;background:var(--black);border-radius:2px;border-left:3px solid var(--orange);text-align:left;"></div>
+      <a id="calCTA" href="https://wa.me/919871491885" class="btn-whatsapp" style="display:flex;justify-content:center;">💬 Book a Session with Piyush</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROTEIN CALCULATOR -->
+<section id="protein" style="background:var(--dark);border-top:1px solid var(--border);">
+  <div class="section-tag">Free Tool</div>
+  <div class="section-title">PROTEIN CALCULATOR</div>
+  <p style="color:var(--muted);margin-bottom:32px;font-size:0.9rem;">Protein is the building block of every result — find out exactly how much you need.</p>
+  <div style="max-width:520px;margin:0 auto;background:var(--black);border:1px solid var(--border);border-radius:4px;padding:36px 32px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+      <div>
+        <label style="font-size:0.75rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:8px;">Weight (kg)</label>
+        <input id="proWeight" type="number" placeholder="e.g. 70" style="width:100%;background:var(--dark);border:1px solid var(--border);color:var(--white);padding:12px 16px;font-size:0.9rem;border-radius:2px;outline:none;font-family:'Inter',sans-serif;" />
+      </div>
+      <div>
+        <label style="font-size:0.75rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:8px;">Activity Level</label>
+        <select id="proActivity" style="width:100%;background:var(--dark);border:1px solid var(--border);color:var(--white);padding:12px 16px;font-size:0.9rem;border-radius:2px;outline:none;font-family:'Inter',sans-serif;">
+          <option value="sedentary">Not Very Active</option>
+          <option value="moderate">Moderately Active</option>
+          <option value="active">Very Active / Athlete</option>
+        </select>
+      </div>
+    </div>
+    <div style="margin-bottom:20px;">
+      <label style="font-size:0.75rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:8px;">Your Goal</label>
+      <select id="proGoal" style="width:100%;background:var(--dark);border:1px solid var(--border);color:var(--white);padding:12px 16px;font-size:0.9rem;border-radius:2px;outline:none;font-family:'Inter',sans-serif;">
+        <option value="lose">Lose Fat (preserve muscle)</option>
+        <option value="maintain">Maintain & Stay Fit</option>
+        <option value="gain">Build Muscle / Gain Mass</option>
+        <option value="athlete">Athletic Performance</option>
+      </select>
+    </div>
+    <button onclick="calculateProtein()" class="btn-primary" style="width:100%;text-align:center;border:none;cursor:pointer;font-family:'Inter',sans-serif;">Calculate My Protein</button>
+    <div id="proResult" style="display:none;margin-top:24px;padding:24px;border-radius:2px;border:1px solid var(--border);text-align:center;">
+      <div id="proNumber" style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--orange);line-height:1;"></div>
+      <div style="font-size:0.72rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Grams of Protein Per Day</div>
+      <div id="proFoods" style="margin-bottom:16px;text-align:left;"></div>
+      <div id="proMessage" style="font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:20px;padding:14px;background:var(--dark);border-radius:2px;border-left:3px solid var(--orange);text-align:left;"></div>
+      <a id="proCTA" href="https://wa.me/919871491885" class="btn-whatsapp" style="display:flex;justify-content:center;">💬 Book a Session with Piyush</a>
+    </div>
+  </div>
+</section>
+
+<!-- BODY FAT CALCULATOR -->
+<section id="bodyfat" style="background:var(--black);border-top:1px solid var(--border);">
+  <div class="section-tag">Free Tool</div>
+  <div class="section-title">BODY FAT ESTIMATOR</div>
+  <p style="color:var(--muted);margin-bottom:32px;font-size:0.9rem;">Estimate your body fat % using the US Navy Method — tape measure required.</p>
+  <div style="max-width:520px;margin:0 auto;background:var(--dark);border:1px solid var(--border);border-radius:4px;padding:36px 32px;">
+    <div style="margin-bottom:16px;">
+      <label style="font-size:0.75rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:8px;">Gender</label>
+      <select id="bfGender" onchange="toggleBFFields()" style="width:100%;background:var(--black);border:1px solid var(--border);color:var(--white);padding:12px 16px;font-size:0.9rem;border-radius:2px;outline:none;font-family:'Inter',sans-serif;">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+      <div>
+        <label style="font-size:0.75rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:8px;">Height (cm)</label>
+        <input id="bfHeight" type="number" placeholder="e.g. 170" style="width:100%;background:var(--black);border:1px solid var(--border);color:var(--white);padding:12px 16px;font-size:0.9rem;border-radius:2px;outline:none;font-family:'Inter',sans-serif;" />
+      </div>
+      <div>
+        <label style="font-size:0.75rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:8px;">Neck (cm)</label>
+        <input id="bfNeck" type="number" placeholder="e.g. 38" style="width:100%;background:var(--black);border:1px solid var(--border);color:var(--white);padding:12px 16px;font-size:0.9rem;border-radius:2px;outline:none;font-family:'Inter',sans-serif;" />
+      </div>
+      <div>
+        <label style="font-size:0.75rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:8px;">Waist (cm)</label>
+        <input id="bfWaist" type="number" placeholder="e.g. 85" style="width:100%;background:var(--black);border:1px solid var(--border);color:var(--white);padding:12px 16px;font-size:0.9rem;border-radius:2px;outline:none;font-family:'Inter',sans-serif;" />
+      </div>
+      <div id="bfHipDiv">
+        <label style="font-size:0.75rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:8px;">Hip (cm) <span style="color:var(--muted);font-size:0.65rem;">females only</span></label>
+        <input id="bfHip" type="number" placeholder="e.g. 95" style="width:100%;background:var(--black);border:1px solid var(--border);color:var(--white);padding:12px 16px;font-size:0.9rem;border-radius:2px;outline:none;font-family:'Inter',sans-serif;" />
+      </div>
+    </div>
+    <button onclick="calculateBodyFat()" class="btn-primary" style="width:100%;text-align:center;border:none;cursor:pointer;font-family:'Inter',sans-serif;">Estimate My Body Fat %</button>
+    <div id="bfResult" style="display:none;margin-top:24px;padding:24px;border-radius:2px;border:1px solid var(--border);text-align:center;">
+      <div id="bfNumber" style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--orange);line-height:1;"></div>
+      <div style="font-size:0.72rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Body Fat Percentage</div>
+      <div id="bfCategory" style="font-size:0.9rem;font-weight:600;margin-bottom:16px;"></div>
+      <div id="bfMessage" style="font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:20px;padding:14px;background:var(--dark);border-radius:2px;border-left:3px solid var(--orange);text-align:left;"></div>
+      <a id="bfCTA" href="https://wa.me/919871491885" class="btn-whatsapp" style="display:flex;justify-content:center;">💬 Book a Session with Piyush</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-tag">Get In Touch</div>
+  <div class="section-title">CONTACT</div>
+  <p style="color:var(--muted);margin-bottom:24px;">WhatsApp karo directly — fastest response guaranteed!</p>
+  <a href="https://wa.me/919871491885" class="btn-whatsapp" style="font-size:1rem;padding:16px 36px;border-radius:2px;">💬 WhatsApp Piyush — 9871491885</a>
+  <br><br>
+  <a href="mailto:piyushloharwadia@gmail.com" class="contact-email">
+    📧 piyushloharwadia@gmail.com
+  </a>
+  <p class="contact-sub">Typically responds within a few hours</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">THE SPORTS COACH · PIYUSH LOHARWADIA</div>
+  <div class="footer-copy">© 2026 · Fitness Coach · Dwarka, New Delhi</div>
+</footer>
+
+<script>
+  const SYSTEM_PROMPT = `You are a fitness AI assistant for Piyush Loharwadia, an elite fitness coach based in Dwarka, New Delhi. Piyush is a national gold medalist in powerlifting, trained at Chhatrasal Stadium, and has coached 50+ clients.
+
+His specialties: Weight Loss, Muscle Gain, HIIT Workouts, Athletics Training, Hyrox Training, Hybrid Training.
+Pricing: Group Membership ₹2000/month (park sessions Dwarka), 1-on-1 Personal Training ₹3500/month, Online Plan ₹600/month. FREE 2-day demo available. WhatsApp: +91 9871491885
+
+Your job:
+- Answer fitness questions helpfully and concisely (2-4 sentences max per reply)
+- Give real, practical advice on training, nutrition, and workouts
+- For anything needing a personalized plan — end with: "For a plan made for you, WhatsApp Piyush directly: +91 9871491885 — or try the FREE 2-day demo!"
+- Keep tone friendly and motivating
+- Never refuse a fitness question`;
+
+  let conversation = [];
+
+  async function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const messages = document.getElementById('chatMessages');
+    const userText = input.value.trim();
+    if (!userText) return;
+
+    // User message
+    const userMsg = document.createElement('div');
+    userMsg.className = 'msg msg-user';
+    userMsg.textContent = userText;
+    messages.appendChild(userMsg);
+    input.value = '';
+    messages.scrollTop = messages.scrollHeight;
+
+    // Typing indicator
+    const typing = document.createElement('div');
+    typing.className = 'typing';
+    typing.innerHTML = '<span></span><span></span><span></span>';
+    messages.appendChild(typing);
+    messages.scrollTop = messages.scrollHeight;
+
+    conversation.push({ role: 'user', content: userText });
+
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6',
+          max_tokens: 1000,
+          system: SYSTEM_PROMPT,
+          messages: conversation
+        })
+      });
+
+      const data = await response.json();
+      const reply = data.content?.[0]?.text || "Sorry, couldn't get a response. Please try again!";
+
+      conversation.push({ role: 'assistant', content: reply });
+
+      typing.remove();
+      const botMsg = document.createElement('div');
+      botMsg.className = 'msg msg-bot';
+      botMsg.textContent = reply;
+      messages.appendChild(botMsg);
+      messages.scrollTop = messages.scrollHeight;
+
+    } catch (err) {
+      typing.remove();
+      const errMsg = document.createElement('div');
+      errMsg.className = 'msg msg-bot';
+      errMsg.textContent = "Something went wrong. Please try again in a moment!";
+      messages.appendChild(errMsg);
+      messages.scrollTop = messages.scrollHeight;
+    }
+  }
+
+  const specialties = {
+    weightloss: {
+      icon: '🔥', title: 'Weight Loss',
+      content: `Your body has the ability to transform — it just needs the right direction. Carrying extra weight affects your energy levels, your confidence, your sleep, and how you feel every single day. It holds you back from doing things you love — running with your kids, climbing stairs without getting tired, feeling good in your own skin.\n\nWith Piyush's weight loss program, you don't just lose weight — you gain a lifestyle. Every session is designed to burn fat efficiently while preserving muscle, so you look fit and feel strong — not just thin. Nutrition guidance is included so you know exactly what to eat, without starving yourself.\n\nThousands of people have transformed their bodies with the right coach. You're one decision away from starting yours.`
+    },
+    musclegain: {
+      icon: '💪', title: 'Muscle Gain',
+      content: `A strong body isn't just about looks — it's about confidence, performance, and feeling powerful every day. Whether you want to fill out your frame, improve your athletic performance, or simply feel stronger in everything you do — muscle gain is the foundation.\n\nPiyush designs progressive training programs that push your body in the right way — so you build real, lean muscle without wasting months doing the wrong exercises. Combined with proper nutrition guidance, you'll see changes in your physique, your strength, and your mindset.\n\nMore muscle means a faster metabolism, better posture, stronger joints, and a body that works for you — not against you. Start building today.`
+    },
+    hiit: {
+      icon: '⚡', title: 'HIIT Workout',
+      content: `HIIT — High Intensity Interval Training — is one of the most powerful training methods in the world. Short bursts of intense effort followed by rest periods push your body to burn more calories, improve cardiovascular health, and build endurance — all in less time than a regular workout.\n\nFor athletes and sports players, HIIT directly improves on-field performance — better stamina, faster recovery, and sharper reactions. For school kids and young athletes, it builds a strong athletic foundation early. For everyday people, it's the fastest way to get fit without spending hours in the gym.\n\nWith Piyush's HIIT sessions in the open park, every session is intense, effective, and energising. You'll finish tired — and comeback the next day wanting more.`
+    },
+    athletics: {
+      icon: '🏃', title: 'Athletics Workout',
+      content: `Athletics training is not just for professional athletes — it's for anyone who wants to move better, faster, and stronger. Speed, agility, coordination, explosive power — these qualities make you better at every sport and better in everyday life.\n\nPiyush trained for 6+ years at Chhatrasal Stadium — one of Delhi's most elite sports facilities — across sprinting, long jump, and high jump. He knows what real athletic development looks like, and he brings that same training philosophy to his clients.\n\nWhether you're a school student who wants to excel in sports, a parent who wants their child to develop athletically, or an adult who wants to move like an athlete — this program will unlock a level of fitness you didn't know you had.`
+    },
+    hybrid: {
+      icon: '🔄', title: 'Hybrid Training',
+      content: `Why choose between being strong OR having endurance — when you can have both? Hybrid training combines strength work and cardio conditioning into one complete system that builds a truly balanced, capable body.\n\nA hybrid athlete can lift heavy, run long, and recover fast. They don't gas out, they don't get injured easily, and they perform well across every physical challenge life throws at them. This is the type of fitness that actually matters in the real world.\n\nPiyush's hybrid programs are designed to develop both qualities together — so you're not just strong in the gym but powerful everywhere. If you want to be genuinely fit — not just look it — hybrid training is your answer.`
+    },
+    strengthconditioning: {
+      icon: '🏋️', title: 'Strength & Conditioning',
+      content: `Strength is the foundation of all fitness. Whether you want to run faster, jump higher, play better, or simply feel powerful — it all starts with building a strong, well-conditioned body.\n\nPiyush's strength and conditioning protocols are built from real competitive athletic experience — the same methods used to train national-level powerlifters and track athletes. Progressive overload, periodization, and smart recovery are built into every program so your body gets stronger consistently without breaking down.\n\nThis isn't just gym training — it's athletic development. You'll build functional strength that transfers to sport, to daily life, and to everything in between. Strong people don't just look different — they live differently.`
+    },
+    functional: {
+      icon: '⚙️', title: 'Functional Training',
+      content: `Most people train muscles — functional training trains movements. Pushing, pulling, squatting, hinging, carrying — these are the movements your body performs every single day, and when you train them properly, everything in your life gets easier.\n\nFunctional training improves posture, reduces back and joint pain, builds real-world strength, and makes daily tasks feel effortless. It's especially powerful for people who sit at a desk all day, parents who carry kids, or anyone who wants their body to work better outside the gym.\n\nWith Piyush's functional training sessions in the open air, you'll build a body that isn't just strong on paper — but genuinely capable in real life. This is fitness that actually serves you.`
+    },
+    boxing: {
+      icon: '🥊', title: 'Boxing Drills',
+      content: `Boxing is one of the most complete workouts you can do — and it's not just for fighters. The footwork, the combinations, the head movement — boxing training builds coordination, reflexes, core strength, and cardiovascular fitness all at once.\n\nBeyond fitness, boxing teaches you real self-defence basics. In today's world, knowing how to protect yourself is a skill worth having — for men, women, and especially young people. Piyush has competed at district level in boxing and brings genuine ring experience to every session.\n\nYou don't need to fight anyone. You just need to train like a fighter — and you'll build a body and confidence that shows it.`
+    },
+    sprinting: {
+      icon: '💨', title: 'Sprinting Mechanics',
+      content: `Speed is a skill — and like every skill, it can be taught and improved. Most people never learn to run properly, which means they're slower than they could be and more prone to injury than they need to be.\n\nPiyush is a trained 400m sprinter and track athlete from Chhatrasal Stadium. He understands acceleration mechanics, proper stride technique, arm drive, and how to build explosive speed from the ground up. Whether you're a student trying to run faster in school races, a footballer wanting better pace on the pitch, or an adult who wants to sprint without getting injured — this is the program for you.\n\nSpeed training also builds powerful legs, strong glutes, and incredible cardiovascular fitness. It's one of the most underrated forms of training — and one of the most rewarding.`
+    },
+    powerlifting: {
+      icon: '🏆', title: 'Powerlifting Coaching',
+      content: `Powerlifting is the sport of absolute strength — squat, bench press, deadlift. Three lifts. Maximum effort. And Piyush won 2 National Gold Medals in it — without a coach, without a fancy gym, purely through self-discipline and intelligent programming.\n\nThat experience is what he now passes on to you. Whether you want to compete or simply want to learn the big three lifts correctly, Piyush will teach you proper technique, safe progression, and how to peak for maximum strength.\n\nPowerlifting builds a foundation of raw strength that benefits every other form of training. When you're strong in the squat, deadlift, and bench — everything else gets easier. This is strength training at its most pure and most powerful.`
+    },
+    injury: {
+      icon: '🛡️', title: 'Injury Prevention',
+      content: `The biggest enemy of progress is not laziness — it's injury. One bad movement, one ignored pain, one poorly programmed session — and you're out for weeks or months. This is where most people's fitness journey ends.\n\nPiyush builds injury prevention into every single program. Proper warm-ups, mobility work, correct form from day one, and smart programming that respects your body's limits while still pushing you forward. He knows how to identify movement weaknesses before they become injuries.\n\nTraining with Piyush means you train consistently — month after month, year after year — without the setbacks that stop most people. Long-term consistency beats short-term intensity every time. Stay healthy, stay training, keep growing.`
+    },
+    goalcoaching: {
+      icon: '🎯', title: 'Goal-Based Coaching',
+      content: `Generic plans give generic results. What you need is a plan built specifically for you — your body, your goal, your schedule, your lifestyle.\n\nGoal-based coaching starts with understanding where you are and exactly where you want to go. Want to lose 10kg before a wedding? Build muscle for summer? Improve your performance for a sport? Prepare for a physical fitness test? Whatever the goal — Piyush designs everything around it.\n\nEvery session has a purpose. Every week builds on the last. And your plan evolves as you progress — so you're always moving forward, never plateauing. This is not one-size-fits-all coaching. This is your program, built for you, by someone who genuinely cares about your results.`
+    }
+  };
+
+  function openModal(key) {
+    const s = specialties[key];
+    if (!s) return;
+    document.getElementById('modalIcon').textContent = s.icon;
+    document.getElementById('modalTitle').textContent = s.title;
+    const content = document.getElementById('modalContent');
+    content.innerHTML = '';
+    s.content.split('\n\n').forEach(para => {
+      const p = document.createElement('p');
+      p.textContent = para;
+      p.style.marginBottom = '14px';
+      content.appendChild(p);
+    });
+    document.getElementById('modalCTA').href = `https://wa.me/919871491885?text=${encodeURIComponent('Hi Piyush! I want to know more about ' + s.title + ' training.')}`;
+    const modal = document.getElementById('specialtyModal');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(e) {
+    if (e.target.id === 'specialtyModal') closeModalBtn();
+  }
+
+  function closeModalBtn() {
+    document.getElementById('specialtyModal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+
+  function calculateCalories() {
+    const age = parseFloat(document.getElementById('calAge').value);
+    const gender = document.getElementById('calGender').value;
+    const height = parseFloat(document.getElementById('calHeight').value);
+    const weight = parseFloat(document.getElementById('calWeight').value);
+    const activity = parseFloat(document.getElementById('calActivity').value);
+    const goal = document.getElementById('calGoal').value;
+    if (!age || !height || !weight || age < 10 || age > 100 || height < 100 || weight < 20) {
+      alert('Please fill in all fields correctly!'); return;
+    }
+    let bmr = gender === 'male'
+      ? 10 * weight + 6.25 * height - 5 * age + 5
+      : 10 * weight + 6.25 * height - 5 * age - 161;
+    let tdee = Math.round(bmr * activity);
+    let target, goalLabel, message, ctaMsg;
+    if (goal === 'lose') {
+      target = tdee - 400;
+      goalLabel = 'For Weight Loss';
+      message = 'Your body needs ' + tdee + ' calories just to maintain weight. To lose fat steadily and safely, aim for ' + target + ' calories/day. But calorie cutting alone without the right training leads to muscle loss — you need both. Piyush can build you a program that burns fat while keeping your strength intact.';
+      ctaMsg = 'Hi Piyush! My calorie target for weight loss is ' + target + ' kcal/day. I want help with a proper plan!';
+    } else if (goal === 'maintain') {
+      target = tdee;
+      goalLabel = 'To Maintain Weight';
+      message = 'You need exactly ' + target + ' calories per day to maintain your current weight. Most people eat either too much or too little without realising it. Tracking this properly with a structured plan from Piyush means you stay at your ideal weight and build quality muscle at the same time.';
+      ctaMsg = 'Hi Piyush! My maintenance calories are ' + target + ' kcal/day. I want a plan to stay fit and build muscle!';
+    } else {
+      target = tdee + 300;
+      goalLabel = 'For Muscle Gain';
+      message = 'To build muscle, you need a caloric surplus. Your target is ' + target + ' calories/day — clean, quality food that fuels real muscle growth. Eating more without the right training just adds fat. Piyush will combine your nutrition with the right workout program so every extra calorie goes toward building muscle, not fat.';
+      ctaMsg = 'Hi Piyush! My calorie target for muscle gain is ' + target + ' kcal/day. I need a proper training + diet plan!';
+    }
+    document.getElementById('calNumber').textContent = target;
+    const breakdown = document.getElementById('calBreakdown');
+    breakdown.innerHTML = `
+      <div style="background:var(--dark);padding:12px 8px;border-radius:2px;border:1px solid var(--border);">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--orange);">${Math.round(target*0.3/4)}g</div>
+        <div style="font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">Protein</div>
+      </div>
+      <div style="background:var(--dark);padding:12px 8px;border-radius:2px;border:1px solid var(--border);">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--orange);">${Math.round(target*0.45/4)}g</div>
+        <div style="font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">Carbs</div>
+      </div>
+      <div style="background:var(--dark);padding:12px 8px;border-radius:2px;border:1px solid var(--border);">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--orange);">${Math.round(target*0.25/9)}g</div>
+        <div style="font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">Fats</div>
+      </div>`;
+    document.getElementById('calMessage').textContent = message;
+    document.getElementById('calCTA').href = 'https://wa.me/919871491885?text=' + encodeURIComponent(ctaMsg);
+    document.getElementById('calResult').style.display = 'block';
+  }
+
+  function calculateProtein() {
+    const weight = parseFloat(document.getElementById('proWeight').value);
+    const activity = document.getElementById('proActivity').value;
+    const goal = document.getElementById('proGoal').value;
+    if (!weight || weight < 20 || weight > 300) {
+      alert('Please enter a valid weight!'); return;
+    }
+    let multiplier;
+    if (goal === 'lose') multiplier = activity === 'active' ? 2.2 : 1.8;
+    else if (goal === 'maintain') multiplier = activity === 'active' ? 1.8 : 1.4;
+    else if (goal === 'gain') multiplier = activity === 'active' ? 2.4 : 2.0;
+    else multiplier = 2.6;
+    const protein = Math.round(weight * multiplier);
+    const minP = Math.round(weight * (multiplier - 0.2));
+    let message, ctaMsg;
+    if (protein > weight * 2.2) {
+      message = 'You need ' + protein + 'g of protein daily — that is high, and for good reason. At this level of training and your goal, your muscles need maximum fuel to grow and recover. Most people are getting half of what they need — which is exactly why they stop seeing results. Piyush will help you structure your diet so hitting this number feels natural, not forced.';
+      ctaMsg = 'Hi Piyush! I need ' + protein + 'g of protein daily. Can you help me plan my diet and training?';
+    } else if (protein < weight * 1.5) {
+      message = 'You need ' + protein + 'g of protein per day. Even at a moderate activity level, most people are far below this. Without enough protein, your body cannot maintain muscle, recover from workouts, or burn fat efficiently. A proper diet plan from Piyush will make sure you hit this target every day through real food — no guesswork.';
+      ctaMsg = 'Hi Piyush! My protein target is ' + protein + 'g/day. I want a proper diet + training plan!';
+    } else {
+      message = 'Your daily protein target is ' + protein + 'g. This is the sweet spot for your goal — enough to build or preserve muscle while supporting your training. The challenge most people face is consistency. Piyush will help you build a diet plan around your food preferences so you hit this number every single day and see real results.';
+      ctaMsg = 'Hi Piyush! My protein requirement is ' + protein + 'g/day. Help me plan my diet and workouts!';
+    }
+    const foods = [
+      { name: 'Chicken Breast (100g)', p: 31 },
+      { name: 'Eggs (1 whole)', p: 6 },
+      { name: 'Paneer (100g)', p: 18 },
+      { name: 'Dal (1 cup cooked)', p: 9 },
+      { name: 'Greek Yogurt (150g)', p: 15 },
+      { name: 'Whey Protein (1 scoop)', p: 25 },
+    ];
+    document.getElementById('proNumber').textContent = minP + '–' + protein;
+    const foodDiv = document.getElementById('proFoods');
+    foodDiv.innerHTML = '<div style="font-size:0.72rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">Top Protein Sources</div>' +
+      foods.map(f => `<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:0.8rem;"><span style="color:var(--muted);">${f.name}</span><span style="color:var(--orange);font-weight:600;">${f.p}g</span></div>`).join('');
+    document.getElementById('proMessage').textContent = message;
+    document.getElementById('proCTA').href = 'https://wa.me/919871491885?text=' + encodeURIComponent(ctaMsg);
+    document.getElementById('proResult').style.display = 'block';
+  }
+
+  function toggleBFFields() {
+    const gender = document.getElementById('bfGender').value;
+    document.getElementById('bfHipDiv').style.opacity = gender === 'female' ? '1' : '0.3';
+  }
+
+  function calculateBodyFat() {
+    const gender = document.getElementById('bfGender').value;
+    const height = parseFloat(document.getElementById('bfHeight').value);
+    const neck = parseFloat(document.getElementById('bfNeck').value);
+    const waist = parseFloat(document.getElementById('bfWaist').value);
+    const hip = parseFloat(document.getElementById('bfHip').value);
+    if (!height || !neck || !waist || height < 100 || neck < 20 || waist < 40) {
+      alert('Please fill in all measurements correctly!'); return;
+    }
+    if (gender === 'female' && !hip) { alert('Please enter hip measurement for females!'); return; }
+    let bf;
+    if (gender === 'male') {
+      bf = 495 / (1.0324 - 0.19077 * Math.log10(waist - neck) + 0.15456 * Math.log10(height)) - 450;
+    } else {
+      bf = 495 / (1.29579 - 0.35004 * Math.log10(waist + hip - neck) + 0.22100 * Math.log10(height)) - 450;
+    }
+    bf = Math.max(3, Math.min(60, parseFloat(bf.toFixed(1))));
+    let category, color, message, ctaMsg;
+    if (gender === 'male') {
+      if (bf < 6) { category = 'Essential Fat'; color = '#64b5f6'; message = 'You are at essential fat levels — very lean, typically seen in elite athletes during competition. This is hard to maintain long-term. Piyush can help you stay at a sustainable athletic level while keeping your performance high.'; ctaMsg = 'Hi Piyush! My body fat is ' + bf + '% (Essential Fat). Help me maintain my athletic physique!'; }
+      else if (bf < 14) { category = 'Athletic 🏆'; color = '#66bb6a'; message = 'Excellent! You are in the athletic range — lean, muscular, and performing well. This is where most serious athletes sit. With Piyush\'s training, you can push your performance even further and maintain this elite body composition year-round.'; ctaMsg = 'Hi Piyush! My body fat is ' + bf + '% (Athletic). I want to maintain and improve my performance!'; }
+      else if (bf < 18) { category = 'Fit'; color = '#aed581'; message = 'You\'re in the fit range — healthy, active, and looking good. There is still room to build more muscle and lean down a bit to reach the athletic zone. Piyush\'s strength and conditioning program can get you there in a few months.'; ctaMsg = 'Hi Piyush! My body fat is ' + bf + '% (Fit). I want to reach athletic level with your training!'; }
+      else if (bf < 25) { category = 'Average'; color = '#ffa726'; message = 'You\'re at an average body fat level. While not dangerous, this range often comes with lower energy, reduced performance, and less muscle definition. The good news — you\'re close to the fit range. With the right training and nutrition from Piyush, you can be there in 8–12 weeks.'; ctaMsg = 'Hi Piyush! My body fat is ' + bf + '% (Average). I want to get leaner and fitter — book a session!'; }
+      else { category = 'High Body Fat'; color = '#ef5350'; message = 'Your body fat is above the healthy range. This means your body is carrying more fat than muscle — which affects your energy, strength, and long-term health. The right training and diet plan can change this completely. Piyush has helped clients transform from this exact level — and you can too.'; ctaMsg = 'Hi Piyush! My body fat is ' + bf + '%. I want to reduce it with a proper training plan — let\'s connect!'; }
+    } else {
+      if (bf < 14) { category = 'Essential Fat'; color = '#64b5f6'; message = 'You\'re at essential fat levels — very low for a female, typically seen in elite competitors. This is hard to sustain. Piyush can help you find your optimal athletic body composition without compromising health or hormones.'; ctaMsg = 'Hi Piyush! My body fat is ' + bf + '% (Essential). I need guidance on maintaining a healthy athletic physique!'; }
+      else if (bf < 21) { category = 'Athletic 🏆'; color = '#66bb6a'; message = 'You\'re in the athletic range for women — lean, strong, and performing well. This is where serious female athletes sit. With Piyush\'s structured training, you can maintain this elite level and keep getting stronger.'; ctaMsg = 'Hi Piyush! My body fat is ' + bf + '% (Athletic female). I want to keep improving with your coaching!'; }
+      else if (bf < 25) { category = 'Fit'; color = '#aed581'; message = 'You\'re in a healthy, fit range. You have a good foundation — now it\'s time to build on it. A few months of structured training with Piyush can move you into the athletic zone and seriously improve how you look, feel, and perform.'; ctaMsg = 'Hi Piyush! My body fat is ' + bf + '% (Fit female). I want to get more athletic — let\'s train!'; }
+      else if (bf < 32) { category = 'Average'; color = '#ffa726'; message = 'You\'re at average body fat. Many women in this range feel low energy, uncomfortable in their skin, and frustrated with slow progress. The truth is — without the right training program, fat doesn\'t go away on its own. Piyush\'s coaching can change your body composition completely in 10–14 weeks.'; ctaMsg = 'Hi Piyush! My body fat is ' + bf + '% (Average female). I want to get leaner — book a session!'; }
+      else { category = 'High Body Fat'; color = '#ef5350'; message = 'Your body fat is above the healthy range — but this is exactly what can be fixed with the right plan. Piyush\'s clients have transformed from similar starting points. The sooner you start, the sooner you see results. A personalised training + nutrition plan is one WhatsApp message away.'; ctaMsg = 'Hi Piyush! My body fat is ' + bf + '%. I want to reduce it and get fit — let\'s connect!'; }
+    }
+    document.getElementById('bfNumber').textContent = bf + '%';
+    const cat = document.getElementById('bfCategory');
+    cat.textContent = category;
+    cat.style.color = color;
+    document.getElementById('bfMessage').textContent = message;
+    document.getElementById('bfCTA').href = 'https://wa.me/919871491885?text=' + encodeURIComponent(ctaMsg);
+    document.getElementById('bfResult').style.display = 'block';
+  }
+
+  function calculateBMI() {
+    const h = parseFloat(document.getElementById('bmiHeight').value);
+    const w = parseFloat(document.getElementById('bmiWeight').value);
+    if (!h || !w || h < 50 || h > 250 || w < 20 || w > 300) {
+      alert('Please enter valid height and weight!');
+      return;
+    }
+    const bmi = (w / ((h/100) * (h/100))).toFixed(1);
+    let category, message, color;
+    if (bmi < 18.5) {
+      category = 'Underweight'; color = '#64b5f6';
+      message = 'Your body needs more muscle and strength. A structured nutrition + training plan can help you build a stronger, healthier body.';
+    } else if (bmi < 25) {
+      category = 'Healthy Weight ✓'; color = '#66bb6a';
+      message = 'Great starting point! Now focus on performance, strength, and body composition to become your best version.';
+    } else if (bmi < 30) {
+      category = 'Overweight'; color = '#ffa726';
+      message = 'A consistent workout + diet plan can get you back to your ideal range. Many clients have done it — you can too.';
+    } else {
+      category = 'Obese'; color = '#ef5350';
+      message = 'This is the right time to take action. With the right guidance, people have transformed completely. Your journey starts today.';
+    }
+    document.getElementById('bmiNumber').textContent = bmi;
+    document.getElementById('bmiCategory').textContent = category;
+    document.getElementById('bmiCategory').style.color = color;
+    document.getElementById('bmiMessage').textContent = message;
+    const waMsg = `Hi Piyush! My BMI is ${bmi} (${category}). I'd love a free plan to improve my fitness!`;
+    document.getElementById('bmiCTA').href = `https://wa.me/919871491885?text=${encodeURIComponent(waMsg)}`;
+    document.getElementById('bmiResult').style.display = 'block';
+  }
+
+
+  document.getElementById('chatInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') sendMessage();
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Add reveal to specialty cards dynamically
+  document.querySelectorAll('.specialty-card').forEach((card, i) => {
+    card.classList.add('reveal');
+    card.style.transitionDelay = (i * 0.06) + 's';
+    observer.observe(card);
+  });
+
+  // Add reveal to pricing cards
+  document.querySelectorAll('.consult-card').forEach((card, i) => {
+    card.classList.add('reveal');
+    card.style.transitionDelay = (i * 0.1) + 's';
+    observer.observe(card);
+  });
+
+  // Add reveal to highlights
+  document.querySelectorAll('.highlight').forEach((el, i) => {
+    el.classList.add('reveal-left');
+    el.style.transitionDelay = (i * 0.1) + 's';
+    observer.observe(el);
+  });
+
+  // Section titles
+  document.querySelectorAll('.section-title, .section-tag').forEach(el => {
+    el.classList.add('reveal');
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
